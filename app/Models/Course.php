@@ -60,6 +60,8 @@ class Course extends Model
         return $value;
     }
 
-    
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 
 }

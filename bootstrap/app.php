@@ -26,6 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'onboarding' => App\Http\Middleware\ApiOnBoardingMiddleware::class
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'api/student/course/booking/stripe/webhook',
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
