@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\SocialLoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\Backend\BookingController;
 use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\CoursesController;
 use App\Http\Controllers\Web\Backend\GradeLevelController;
@@ -34,6 +35,10 @@ Route::controller(CategoryController::class)->prefix('admin/category')->name('ad
     Route::get('status/{id}', 'status')->name('status');
 });
 // Category all route end
+
+Route::controller(BookingController::class)->prefix('admin/booking')->name('admin.booking.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
 // Grade Level all route start
 

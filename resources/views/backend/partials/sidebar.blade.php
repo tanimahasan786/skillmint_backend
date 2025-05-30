@@ -28,12 +28,9 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        {{-- ..................................................... --}}
-
 
         <!-- Category -->
-        <li
-            class="menu-item {{ Request::routeIs('admin.category.*') || Request::routeIs('admin.category') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::routeIs('admin.category.*') || Request::routeIs('admin.category') ? 'active' : '' }}">
             <a href="{{ route('admin.category.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons fa-solid fa-layer-group"></i>
                 <div data-i18n="Layouts">Categories</div>
@@ -42,8 +39,7 @@
         <!-- Category End  -->
 
         <!-- Grade Level start  -->
-        <li
-            class="menu-item {{ Request::routeIs('admin.grade-level.*') || Request::routeIs('admin.grade-level') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::routeIs('admin.grade-level.*') || Request::routeIs('admin.grade-level') ? 'active' : '' }}">
             <a href="{{ route('admin.grade-level.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons fa-solid fa-square-poll-vertical"></i>
                 <div data-i18n="Layouts">Grade Levels</div>
@@ -52,16 +48,23 @@
         <!-- Grade Level end -->
 
         <!-- Course start -->
-        <li
-            class="menu-item {{ Request::routeIs('admin.course.*') || Request::routeIs('admin.course') ? 'active' : '' }}">
+        <li class="menu-item {{ Request::routeIs('admin.course.*') || Request::routeIs('admin.course') ? 'active' : '' }}">
             <a href="{{ route('admin.course.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons fa-solid fa-tv"></i>
                 <div data-i18n="Layouts">Courses</div>
             </a>
         </li>
+
+        <li class="menu-item {{ Request::routeIs('admin.booking.*') || Request::routeIs('admin.booking') ? 'active' : '' }}">
+            <a href="{{ route('admin.booking.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons fa-solid fa-money-bill"></i>
+                <div data-i18n="Layouts">Booking</div>
+            </a>
+        </li>
+
         <!-- Course end -->
         <!-- Withdraw Request Start -->
-        <li
+        <!-- <li
             class="menu-item {{ Request::routeIs('admin.withdraw.request*') ||
             Request::routeIs('admin.withdraw.complete*') ||
             Request::routeIs('admin.withdraw.reject*')
@@ -83,7 +86,7 @@
                     <a class="menu-link" href="{{ route('admin.withdraw.reject.index') }}">Reject Lists</a>
                 </li>
             </ul>
-        </li>
+        </li> -->
         <!-- Withdraw Request End  -->
 
         <!-- Settings -->
