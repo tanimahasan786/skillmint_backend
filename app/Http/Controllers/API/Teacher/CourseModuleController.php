@@ -47,10 +47,10 @@ class CourseModuleController extends Controller
 
         // Validate incoming request data
         $request->validate([
-            'course_id' => 'required|exists:courses,id',
-            'title' => 'required|string',
-            'video_url' => 'required|mimes:mp4,avi,mov',
-            'document_url' => 'nullable|mimes:pdf,docx,doc,txt,odt',
+            'course_id'     => 'required|exists:courses,id',
+            'title'         => 'required|string',
+            'video_url'     => 'required|mimes:mp4,avi,mov,mkv,flv,webm',
+            'document_url'  => 'nullable|mimes:pdf,docx,doc,txt,odt',
         ]);
 
         // Check if the user is authenticated
