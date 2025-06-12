@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Course;
+use App\Models\CourseEnroll;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -13,9 +14,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Webhook;
 use Stripe\Exception\ApiErrorException;
-use Stripe\Exception\SignatureVerificationException;
 use Stripe\PaymentIntent;
-use UnexpectedValueException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -61,12 +60,21 @@ class StripeSpliteBookingWebHookController extends Controller
                 'status' => 'pending'
             ]);
 
+            $enroll = CourseEnroll::create([
+                'user_id' => auth('api')->user()->id,
+                'course_id' => $data['course_id'],
+                'transaction_id' => $slug,
+                'amount' => $course_price,
+                'status' => 'pending'
+            ]);
+
             $paymentIntent = PaymentIntent::create([
                 'amount'   => $teacher_amount * 100,
                 'currency' => 'usd',
                 'metadata' => [
                     'slug' => $slug,
-                    'booking_id' => $booking->id
+                    'booking_id' => $booking->id,
+                    'enroll_id' => $enroll->id
                 ],
                 'transfer_data' => [
                     'destination' => $stripe_account_id
@@ -124,18 +132,32 @@ class StripeSpliteBookingWebHookController extends Controller
     protected function success($paymentIntent): void
     {
         //$admin      = User::role('admin', 'web')->first();
+
         $booking_id   = $paymentIntent->metadata->booking_id;
         $booking = Booking::find($booking_id);
         $booking->status = 'success';
         $booking->save();
+
+        $enroll_id = $paymentIntent->metadata->enroll_id;
+        $enroll = CourseEnroll::find($enroll_id);
+        $enroll->status = 'completed';
+        $enroll->save();
+
     }
 
     protected function failure($paymentIntent): void
     {
         //$admin      = User::role('admin', 'web')->first();
+
         $booking_id   = $paymentIntent->metadata->booking_id;
         $booking = Booking::find($booking_id);
         $booking->status = 'failed';
         $booking->save();
+
+        $enroll_id = $paymentIntent->metadata->enroll_id;
+        $enroll = CourseEnroll::find($enroll_id);
+        $enroll->status = 'rejected';
+        $enroll->save();
+        
     }
 }
