@@ -115,10 +115,7 @@ Route::group(['middleware' => 'auth:api'], static function () {
     Route::controller(\App\Http\Controllers\API\Student\CurriculumController::class)->prefix('student/course-curriculum')->group(function () {
         Route::get('/details/{curriculum}', 'details');
     });
-    Route::controller(\App\Http\Controllers\API\Student\MyResourceController::class)->prefix('my-resources')->group
-    (function () {
-        Route::get('/', 'index');
-    });
+    
     //Student  mentor all route
     Route::controller(\App\Http\Controllers\API\Student\MentorController::class)->prefix('student/teacher-mentor')->group(function () {
         Route::get('/{user_id}', 'index');
