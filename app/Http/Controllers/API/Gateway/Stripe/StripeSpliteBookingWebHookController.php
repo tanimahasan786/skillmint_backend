@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Gateway\Stripe;
+namespace App\Http\Controllers\API\Gateway\Stripe;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;

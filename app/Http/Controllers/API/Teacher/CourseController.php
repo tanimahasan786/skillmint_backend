@@ -40,7 +40,7 @@ class CourseController extends Controller
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         // Get the authenticated user's ID
-        $userId = Auth::user();
+        $userId = auth('api')->user();
 
         // Validate the request data
         $request->validate([

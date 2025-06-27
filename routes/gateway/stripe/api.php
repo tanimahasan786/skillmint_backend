@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Gateway\Stripe\StripeOnBoardingController;
+use App\Http\Controllers\API\Gateway\Stripe\StripeSpliteBookingCheckoutController;
 use App\Http\Controllers\API\Gateway\Stripe\StripeSpliteBookingWebHookController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,6 +9,12 @@ use Illuminate\Support\Facades\Route;
 Route::controller(StripeSpliteBookingWebHookController::class)->prefix('student/course/booking/stripe/')->name('student.course.booking.stripe.')->group(function () {
     Route::post('/intent', 'intent')->middleware(['auth:api']);
     Route::post('/webhook', 'webhook');
+});
+
+Route::controller(StripeSpliteBookingCheckoutController::class)->prefix('student/course/booking/stripe/')->name('student.course.booking.stripe.')->group(function () {
+    Route::post('/checkout', 'checkout')->middleware(['auth:api']);
+    Route::get('/success/payment', 'success')->name('success.payment');
+    Route::get('/cancel/payment', 'failure')->name('cancel.payment');
 });
 
 //stripe account
