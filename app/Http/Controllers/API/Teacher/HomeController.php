@@ -19,7 +19,7 @@ class HomeController extends Controller
 {
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         // Check if the user is authenticated
         if (!$user) {
@@ -95,7 +95,7 @@ class HomeController extends Controller
     public function filterCategory(Request $request): \Illuminate\Http\JsonResponse
     {
         // Ensure the user is authenticated
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
         if (!$user) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);
         }
@@ -158,7 +158,7 @@ class HomeController extends Controller
     public function searchByCourse(Request $request): \Illuminate\Http\JsonResponse
     {
         // Ensure the user is authenticated
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
         if (!$user) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);
         }
@@ -214,7 +214,7 @@ class HomeController extends Controller
     public function sales(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Ensure user is authenticated and is a teacher
             if (!$user || $user->role !== 'teacher') {

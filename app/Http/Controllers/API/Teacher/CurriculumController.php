@@ -16,7 +16,7 @@ class CurriculumController extends Controller
     public function details(Request $request, $curriculum): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             if (!$user) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);

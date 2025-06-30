@@ -24,7 +24,7 @@ class CourseController extends Controller
 {
     public function view(): \Illuminate\Http\JsonResponse
     {
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
         if (!$userId) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);
         }
@@ -85,7 +85,7 @@ class CourseController extends Controller
     public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
 
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
 
         // Validate the request data
         $request->validate([
@@ -154,7 +154,7 @@ class CourseController extends Controller
     //view all category
     public function getCategories(): \Illuminate\Http\JsonResponse
     {
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
         try {
             if (!$userId) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);
@@ -251,7 +251,7 @@ class CourseController extends Controller
     public function myResource(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             if (!$user || $user->role != 'teacher') {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);

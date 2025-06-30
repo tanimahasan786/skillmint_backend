@@ -20,7 +20,7 @@ class UserController extends Controller
     public function TeacherProfile(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Check if user is authenticated and is a teacher
             if (!$user) {
@@ -137,7 +137,7 @@ class UserController extends Controller
     public function TeacherDeleteProfile(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Check if user is authenticated and is a teacher
             if (!$user) {
@@ -164,7 +164,7 @@ class UserController extends Controller
     public function StudentProfile(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Check if user is authenticated and is a teacher
             if (!$user) {
@@ -273,7 +273,7 @@ class UserController extends Controller
     public function StudentDeleteProfile(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Check if user is authenticated and is a student
             if (!$user) {

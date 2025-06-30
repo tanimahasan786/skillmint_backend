@@ -19,7 +19,7 @@ class CourseModuleController extends Controller
     public function view(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
             if (!$user) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);
             }
@@ -43,7 +43,7 @@ class CourseModuleController extends Controller
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
     
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
 
         // Validate incoming request data
         $request->validate([
@@ -154,7 +154,7 @@ class CourseModuleController extends Controller
     }
     public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
 
         // Validate incoming request data
         $request->validate([
@@ -272,7 +272,7 @@ class CourseModuleController extends Controller
 
     public function delete(Request $request, $moduleId): \Illuminate\Http\JsonResponse
     {
-        $userId = Auth::user();
+        $userId = Auth::guard('api')->user();
 
         if (!$userId) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);

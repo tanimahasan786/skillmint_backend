@@ -19,7 +19,7 @@ class ResourceValueController extends Controller
 {
     public function index(){
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             // Ensure user is authenticated and is a teacher
             if (!$user || $user->role !== 'teacher') {
@@ -74,7 +74,7 @@ class ResourceValueController extends Controller
     }
     public function RevenueBreakdown(Request $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         // Ensure the user is authenticated and is a teacher
         if (!$user || $user->role !== 'teacher') {
@@ -146,7 +146,7 @@ class ResourceValueController extends Controller
     }
     public function EnrollmentCompletionBreakdown(Request $request): \Illuminate\Http\JsonResponse
     {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         // Ensure the user is authenticated and is a teacher
         if (!$user || $user->role !== 'teacher') {

@@ -16,7 +16,7 @@ class MyResourceController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
             if (!$user) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);
             }

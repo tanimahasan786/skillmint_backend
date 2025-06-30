@@ -18,7 +18,7 @@ class TeacherMentorController extends Controller
     public function index(): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::guard('api')->user();
 
             if (!$user) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);

@@ -19,7 +19,7 @@ class TermsAndConditionController extends Controller
 {
     try {
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         if (!$user) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);
@@ -42,7 +42,7 @@ class TermsAndConditionController extends Controller
     public function getPrivacyPolicy(): \Illuminate\Http\JsonResponse
 {
     try {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
         if (!$user) {
             return Helper::jsonErrorResponse('User not authenticated.', 401);
         }

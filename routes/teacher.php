@@ -52,6 +52,7 @@ Route::controller(WithdrawRequestController::class)->group(function () {
     Route::post('/withdraw-request', 'withdrawRequest');
     Route::get('/my-wallet', 'myWallet');
 });
+
 //Teacher Home Api
 Route::controller(HomeController::class)->prefix('home')->group(function () {
     Route::get('/', 'index');

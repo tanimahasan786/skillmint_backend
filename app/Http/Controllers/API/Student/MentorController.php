@@ -19,7 +19,7 @@ class MentorController extends Controller
     {
         try {
             // Ensure the user is authenticated
-            $userId = Auth::user();
+            $userId = Auth::guard('api')->user();
             if (!$userId) {
                 return Helper::jsonErrorResponse('User not authenticated.', 401);
             }
