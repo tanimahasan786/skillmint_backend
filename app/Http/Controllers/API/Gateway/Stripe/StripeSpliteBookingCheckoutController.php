@@ -26,8 +26,8 @@ class StripeSpliteBookingCheckoutController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $this->redirectFail = env("APP_URL") . "/fail";
-        $this->redirectSuccess = env("APP_URL") . "/success";
+        $this->redirectFail = env("APP_URL") . "/payment-failed";
+        $this->redirectSuccess = env("APP_URL") . "/payment-success";
     }
 
     public function checkout(Request $request)

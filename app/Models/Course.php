@@ -18,13 +18,29 @@ class Course extends Model
     protected $casts = [
         'price' => 'double',
     ];
+
+    protected $appends = [
+        'is_enrolled'
+    ];
+
+    public function getIsEnrolledAttribute()
+    {
+        return auth('api')->check() &&
+            Booking::where('user_id', auth('api')->id())
+                ->where('course_id', $this->id)
+                ->where('status', 'success')
+                ->exists();
+    }
+
     public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Review::class);
     }
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo{
         return $this->belongsTo(User::class);
     }
+
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
